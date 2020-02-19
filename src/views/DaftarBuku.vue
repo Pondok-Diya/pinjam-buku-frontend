@@ -22,8 +22,8 @@
                     <th>{{buku.penulis}}</th>
                     <th>{{buku.penerbit}}</th>
                     <th>{{buku.isbn}}</th>
-                    <th><b-btn class="btn btn-info" @click="addbook(buku.id)">Ganti</b-btn></th>
-                    <th><b-btn class="btn btn-warning">Hapus</b-btn></th>
+                    <th><b-btn class="btn btn-info" @click="addBook(buku.id)">Ganti</b-btn></th>
+                    <th><b-btn class="btn btn-warning" @click="confirmMassage(buku.id,buku.judul)">Hapus</b-btn></th>
                 </tr>
             </tbody>
 
@@ -39,19 +39,51 @@ export default {
         }
     },
     methods: {
-        loaddata() {
+        loadData() {
             this.$http
             .get(this.$baseAPI+'daftar-buku')
             .then((response) => {
                 this.bukus = response.data
             }).catch(err=>console.log(err))
         },
-        addbook(id){
+        addBook(id){
             this.$router.push('/ganti-buku/'+id)
+        },
+        hapusBuku(id){
+            this.$http
+            .delete(this.$baseAPI+"hapus-buku/"+id)
+            .then(()=>{
+                this.loadData()
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+        },
+        confirmMassage(id,judul){
+            this.$bvModal.msgBoxConfirm("Apakah Anda yakin ingin menghapus semua data terkait buku "+judul+"?",{
+                title: "Perhatian!!!",
+                size: "sm",
+                okVariant: "danger",
+                okTitle: "Ya",
+                cancelTitle: "Tidak",
+                footerClass: "p-2",
+                hideHeaderClose: false,
+                centred: true
+            })
+            .then((value)=>{
+                if (value) {
+                    this.hapusBuku(id)
+                } else {
+                    console.log(value)
+                }
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
         }
     },
     mounted(){
-        this.loaddata()
+        this.loadData()
     }
 }
 </script>
