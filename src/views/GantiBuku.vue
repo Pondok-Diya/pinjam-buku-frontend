@@ -23,7 +23,7 @@
                     <input type="text" class="form-control" v-model="form.isbn">
                 </div>
                 <div class="form-group">
-                  <b-btn class="btn-info btn-md" value="submit" @click="gantibuku"> Ganti </b-btn>
+                  <b-btn class="btn-info btn-md" value="submit" @click="gantiBuku"> Ganti </b-btn>
               </div>
         </b-form>
         <div v-if="!tampil">{{msg}}</div>
@@ -40,7 +40,7 @@ export default {
         }
     },
     methods: {
-        gantibuku(){
+        gantiBuku(){
             this.$http
             .put(this.$baseAPI+'ganti-buku/'+this.$route.params.id,this.form)
             .then((response)=>{
@@ -56,9 +56,7 @@ export default {
         this.$http
         .get(this.$baseAPI+'ganti-buku/'+this.$route.params.id)
         .then((response)=>{
-            console.log(this.form)
             this.form = response.data
-            console.log(this.form)
         })
         .catch((err)=>{
             console.log(err)
