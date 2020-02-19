@@ -23,7 +23,7 @@
                     <th>{{buku.penerbit}}</th>
                     <th>{{buku.isbn}}</th>
                     <th><b-btn class="btn btn-info" @click="addBook(buku.id)">Ganti</b-btn></th>
-                    <th><b-btn class="btn btn-warning" @click="confirmMassage(buku.id)">Hapus</b-btn></th>
+                    <th><b-btn class="btn btn-warning" @click="confirmMassage(buku.id,buku.judul)">Hapus</b-btn></th>
                 </tr>
             </tbody>
 
@@ -59,8 +59,8 @@ export default {
                 console.log(err)
             })
         },
-        confirmMassage(id){
-            this.$bvModal.msgBoxConfirm("Apakah Anda yakin ingin menghapus semua data terkait buku?",{
+        confirmMassage(id,judul){
+            this.$bvModal.msgBoxConfirm("Apakah Anda yakin ingin menghapus semua data terkait buku "+judul+"?",{
                 title: "Perhatian!!!",
                 size: "sm",
                 okVariant: "danger",
