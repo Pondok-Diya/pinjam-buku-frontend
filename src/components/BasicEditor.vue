@@ -131,7 +131,9 @@
       </editor-menu-bar>
     </b-card>
     <b-card>
-      <editor-content class="editor__content" :editor="editor"/>
+      <div class="editor">
+        <editor-content :editor="editor"/>
+      </div>
     </b-card>
   </div>
 
@@ -193,10 +195,10 @@ export default {
         },
         content: `
           <h2>
-            Hi there,
+            Heading 2,
           </h2>
           <p>
-            this is a very <em>basic</em> example of tiptap.
+            Ini adalah contoh paragraf sederhana. Gunakan <b>tombol</b> pada bagian atas editor untuk mengatur <i>formatting</i>.
           </p>
           <pre><code>body { display: none; }</code></pre>
           <ul>
@@ -239,3 +241,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+  .editor {
+    text-align: left;
+  }
+</style>
