@@ -10,8 +10,7 @@
                     <th scope="col">Penulis</th>
                     <th scope="col">Penerbit</th>
                     <th scope="col">ISBN</th>
-                    <th scope="col">#</th>
-                    <th scope="col">#</th>
+                    <th colspan="2">Opsi</th>
                 </tr>
             </thead>
             <tbody v-for="(buku,index) in bukus" :key="index">
@@ -22,12 +21,12 @@
                     <th>{{buku.penulis}}</th>
                     <th>{{buku.penerbit}}</th>
                     <th>{{buku.isbn}}</th>
-                    <th><b-btn class="btn btn-info" @click="addBook(buku.id)">Ganti</b-btn></th>
+                    <th><b-btn class="btn btn-info" @click="chooseBook(buku.id)">Edit</b-btn></th>
                     <th><b-btn class="btn btn-warning" @click="confirmMassage(buku.id,buku.judul)">Hapus</b-btn></th>
                 </tr>
             </tbody>
-
         </table>
+        <b-btn class="btn btn-success" @click="tambahBuku">Tambah Buku</b-btn>
     </div>
 </template>
 <script>
@@ -41,17 +40,17 @@ export default {
     methods: {
         loadData() {
             this.$http
-            .get(this.$baseAPI+'daftar-buku')
+            .get(this.$baseAPI+'buku')
             .then((response) => {
                 this.bukus = response.data
             }).catch(err=>console.log(err))
         },
-        addBook(id){
-            this.$router.push('/ganti-buku/'+id)
+        chooseBook(id){
+            this.$router.push('/buku/'+id)
         },
         hapusBuku(id){
             this.$http
-            .delete(this.$baseAPI+"hapus-buku/"+id)
+            .delete(this.$baseAPI+"buku/hapus/"+id)
             .then(()=>{
                 this.loadData()
             })
@@ -80,6 +79,9 @@ export default {
             .catch((err)=>{
                 console.log(err)
             })
+        },
+        tambahBuku(){
+            this.$router.push('/tambah-buku')
         }
     },
     mounted(){

@@ -4,6 +4,8 @@ import DaftarBuku from '../views/DaftarBuku.vue'
 import Peminjam from '../views/Peminjam.vue'
 import TambahBuku from '../views/TambahBuku.vue'
 import GantiBuku from '../views/GantiBuku.vue'
+import Login from '../views/Login.vue'
+import Registrasi from '../views/Registrasi.vue'
 
 Vue.use(VueRouter)
 
@@ -26,7 +28,17 @@ const routes = [
  {
      path: '/ganti-buku/:id',
      name: 'ganti-buku',
-    component: GantiBuku
+     component: GantiBuku
+ },
+ {
+     path: '/login',
+     name: 'login',
+     component: Login
+ },
+ {
+     path: '/registrasi',
+     name: 'registrasi',
+     component: Registrasi
  }
 ]
 

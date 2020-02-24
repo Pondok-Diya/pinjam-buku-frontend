@@ -7,19 +7,19 @@
             <b-form>
               <h3 class="text-center text-info">Login</h3>
               <div class="form-group">
-                  <label for="username" class="text-info">Email:</label><br>
-                  <input type="email" name="email" id="email" class="form-control">
+                  <label for="username" class="text-info">Username:</label><br>
+                  <input type="email" name="email" id="email" class="form-control" v-model="form.username">
               </div>
               <div class="form-group">
                   <label for="password" class="text-info">Password:</label><br>
-                  <input type="password" name="password" id="password" class="form-control">
+                  <input type="password" name="password" id="password" class="form-control" v-model="form.password">
               </div>
               <div class="form-group">
                   <label for="remember-me" class="text-info">
                     <span>Ingat saya </span>
                     <span><input type="checkbox"></span>
                   </label><br>
-                  <b-btn class="btn-info btn-md" value="submit"> Kirim </b-btn>
+                  <b-btn class="btn-info btn-md" value="submit" @click="login"> Kirim </b-btn>
               </div>
               <div id="register-link" class="text-right">
                   <router-link class="text-info" to="/register">Daftar di sini</router-link>
@@ -37,11 +37,22 @@ export default {
   components: { },
   data() {
     return {
+      form:{
+        username: '',
+        password: ''
+      }
     };
   },
   methods: {
     login() {
-      
+      this.$http
+      .post(this.$baseAPI+'login',this.form)
+      .then((res)=>{
+        console.log(res.data.msg)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
     },
   },
   created() {
