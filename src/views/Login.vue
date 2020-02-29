@@ -17,9 +17,9 @@
               <div class="form-group">
                   <label for="remember-me" class="text-info">
                     <span>Ingat saya </span>
-                    <span><input type="checkbox"></span>
+                    <span><input type="checkbox" value="true" v-model="form.rememberMe"></span>
                   </label><br>
-                  <b-btn class="btn-info btn-md" value="submit" @click="login"> Kirim </b-btn>
+                  <b-btn class="btn-info btn-md" value="submit" @click="login"> Login </b-btn>
               </div>
               <div id="register-link" class="text-right">
                   <router-link class="text-info" to="/register">Daftar di sini</router-link>
@@ -39,7 +39,8 @@ export default {
     return {
       form:{
         username: '',
-        password: ''
+        password: '',
+        rememberMe: false
       }
     };
   },
@@ -48,7 +49,10 @@ export default {
       this.$http
       .post(this.$baseAPI+'login',this.form)
       .then((res)=>{
-        console.log(res.data.msg)
+        this.$store.dispatch('addToken',res.data.access_token)
+        this.$store.dispatch('addRefreshToken',res.data.refresh_token)
+        console.log(this.$store.getters.getToken)
+        console.log(this.$store.getters.getRefreshToken)
       })
       .catch((err)=>{
         console.log(err)

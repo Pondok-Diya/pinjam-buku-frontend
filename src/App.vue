@@ -4,7 +4,8 @@
       <router-link to="/daftar-buku">Buku</router-link>|
       <router-link to="/daftar-peminjam">Peminjam</router-link>|
       <router-link to="/registrasi">Registrasi</router-link>|
-      <router-link to="/tambah-buku">Tambah Buku</router-link>
+      <router-link to="/tambah-buku">Tambah Buku</router-link>|
+      <router-link to="/login">Login</router-link>
     </div>
     <router-view/>
   </div>

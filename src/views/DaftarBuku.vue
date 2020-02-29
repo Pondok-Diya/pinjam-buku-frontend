@@ -15,14 +15,14 @@
             </thead>
             <tbody v-for="(buku,index) in bukus" :key="index">
                 <tr>
-                    <th scope="row">{{index+1}}</th>
-                    <th>{{buku.judul}}</th>
-                    <th>{{buku.genre}}</th>
-                    <th>{{buku.penulis}}</th>
-                    <th>{{buku.penerbit}}</th>
-                    <th>{{buku.isbn}}</th>
-                    <th><b-btn class="btn btn-info" @click="chooseBook(buku.id)">Edit</b-btn></th>
-                    <th><b-btn class="btn btn-warning" @click="confirmMassage(buku.id,buku.judul)">Hapus</b-btn></th>
+                    <td scope="row">{{index+1}}</td>
+                    <td>{{buku.judul}}</td>
+                    <td>{{buku.genre}}</td>
+                    <td>{{buku.penulis}}</td>
+                    <td>{{buku.penerbit}}</td>
+                    <td>{{buku.isbn}}</td>
+                    <td><b-btn class="btn btn-info" @click="changeBook(buku.id)">Edit</b-btn></td>
+                    <td><b-btn class="btn btn-warning" @click="confirmMassage(buku.id,buku.judul)">Hapus</b-btn></td>
                 </tr>
             </tbody>
         </table>
@@ -39,13 +39,17 @@ export default {
     },
     methods: {
         loadData() {
+            console.log(this.$store.getters.getToken)
             this.$http
-            .get(this.$baseAPI+'buku')
-            .then((response) => {
-                this.bukus = response.data
-            }).catch(err=>console.log(err))
+            .get(this.$baseAPI+'buku',{headers: {'Authorization': `Bearer ${this.$store.getters.getToken}` }})
+            .then((res) => {
+                this.bukus = res.data
+            })
+            .catch((err) => {
+                console.log(err)
+            })
         },
-        chooseBook(id){
+        changeBook(id){
             this.$router.push('/buku/'+id)
         },
         hapusBuku(id){
