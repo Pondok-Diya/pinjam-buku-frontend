@@ -22,7 +22,7 @@ const mutations = {
   }
 }
 const actions = {
-  saveToken: ({commit},newToken) => {
+  refreshToken: ({commit},newToken) => {
     commit('refreshToken',newToken)
   },
   addToken: ({commit},token) => {

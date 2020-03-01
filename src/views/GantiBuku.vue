@@ -42,7 +42,7 @@ export default {
     methods: {
         gantiBuku(){
             this.$http
-            .put(this.$baseAPI+'buku/'+this.$route.params.id,this.form)
+            .put(this.$baseAPI+'buku/'+this.$route.params.id,this.form,{headers: {'Authorization': `Bearer ${this.$store.getters.getToken}` }})
             .then((response)=>{
                 this.msg = response.data.msg
                 this.tampil = false

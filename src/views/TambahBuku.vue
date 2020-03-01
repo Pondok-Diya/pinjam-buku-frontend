@@ -57,7 +57,7 @@ export default {
     methods: {
         addbook(){
             this.$http
-            .post(this.$baseAPI+'buku/tambah',this.form)
+            .post(this.$baseAPI+'buku/tambah',this.form,{headers: {'Authorization': `Bearer ${this.$store.getters.getToken}` }})
             .then((response) => {
                 this.msg = response.data.msg
                 this.tampil = false

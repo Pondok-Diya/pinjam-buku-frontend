@@ -33,7 +33,8 @@ export default {
     },
     methods: {
         loaddata() {
-            this.$http(this.$baseAPI+'daftar-peminjam')
+            this.$http
+            .get(this.$baseAPI+'peminjam',{headers: {'Authorization': `Bearer ${this.$store.getters.getToken}` }})
             .then((response) => {
                 this.peminjam = response.data
             }).catch(err=>console.log(err))

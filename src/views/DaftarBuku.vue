@@ -38,12 +38,27 @@ export default {
         }
     },
     methods: {
+        refresh() {
+            this.$http
+            .get(this.$baseAPI+'token/refresh',{headers: {'Authorization':`Bearer ${this.$store.getters.getRefreshToken}`}})
+            .then((res) => {
+                this.$store.dispatch('saveToken',res.data.access_token)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        },
         loadData() {
             console.log(this.$store.getters.getToken)
             this.$http
             .get(this.$baseAPI+'buku',{headers: {'Authorization': `Bearer ${this.$store.getters.getToken}` }})
             .then((res) => {
-                this.bukus = res.data
+                if (res.data.msg === "Token has expired") {
+                    this.refresh()
+                    this.loadData()
+                } else {
+                    this.bukus = res.data
+                } 
             })
             .catch((err) => {
                 console.log(err)
@@ -54,7 +69,7 @@ export default {
         },
         hapusBuku(id){
             this.$http
-            .delete(this.$baseAPI+"buku/hapus/"+id)
+            .delete(this.$baseAPI+"buku/hapus/"+id,{headers: {'Authorization': `Bearer ${this.$store.getters.getToken}` }})
             .then(()=>{
                 this.loadData()
             })
