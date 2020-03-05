@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/daftar-buku">Buku</router-link>|
-      <router-link to="/daftar-peminjam">Peminjam</router-link>|
-      <router-link to="/registrasi">Registrasi</router-link>|
-      <router-link to="/tambah-buku">Tambah Buku</router-link>|
-      <router-link to="/login">Login</router-link>
-    </div>
+    <navigations/>
     <router-view/>
   </div>
 </template>
-
+<script>
+import Navigations from './components/Navigations'
+export default {
+  components: {
+    Navigations
+  }
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

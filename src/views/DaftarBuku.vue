@@ -42,26 +42,26 @@ export default {
             this.$http
             .get(this.$baseAPI+'token/refresh',{headers: {'Authorization':`Bearer ${this.$store.getters.getRefreshToken}`}})
             .then((res) => {
-                this.$store.dispatch('saveToken',res.data.access_token)
+                localStorage.setItem('user-token',res.data.access_token)
             })
             .catch((err) => {
                 console.log(err)
             })
         },
         loadData() {
+            console.log(localStorage.getItem('user-token'))
             console.log(this.$store.getters.getToken)
+            console.log('__')
             this.$http
             .get(this.$baseAPI+'buku',{headers: {'Authorization': `Bearer ${this.$store.getters.getToken}` }})
             .then((res) => {
-                if (res.data.msg === "Token has expired") {
-                    this.refresh()
-                    this.loadData()
-                } else {
-                    this.bukus = res.data
-                } 
+                console.log(res.status)
+                this.bukus = res.data     
             })
             .catch((err) => {
                 console.log(err)
+                //this.refresh()
+                //this.loadData()
             })
         },
         changeBook(id){

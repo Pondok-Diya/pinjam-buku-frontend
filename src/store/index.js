@@ -5,31 +5,45 @@ Vue.use(Vuex);
 const state = {
   accessToken: '',
   refreshToken: ''
+  
 }
 const getters = {
   getToken: state => state.accessToken,
-  getRefreshToken: state => state.refreshToken
+  getRefreshToken: state => state.refreshToken,
+  isAuthenticated: state => !!state.accessToken
 }
 const mutations = {
   addToken: (state,token) => {
-    state.accessToken = token
+    state.accessToken = localStorage.getItem(token)
   },
   addRefreshToken: (state,refreshToken) => {
-    state.refreshToken = refreshToken
+    state.refreshToken = localStorage.getItem(refreshToken)
   },
   refreshToken: (state,newToken) => {
-    state.accessToken = newToken
+    state.accessToken = localStorage.getItem(newToken)
+  },
+  deleteToken: (state) => {
+    localStorage.setItem('user-token','')
+    state.accessToken = ''
+  },
+  deleteRefreshToken: (state) => {
+    localStorage.setItem('refresh-token','')
+    state.refreshToken = ''
   }
 }
 const actions = {
-  refreshToken: ({commit},newToken) => {
+  saveRefreshToken: ({commit},newToken) => {
     commit('refreshToken',newToken)
   },
-  addToken: ({commit},token) => {
+  saveAddToken: ({commit},token) => {
     commit('addToken',token)
   },
-  addRefreshToken: ({commit},refreshToken) => {
+  saveAddRefreshToken: ({commit},refreshToken) => {
     commit('addRefreshToken',refreshToken)
+  },
+  logout: ({commit}) => {
+    commit('deleteToken')
+    commit('deleteRefreshToken')
   }
 }
 

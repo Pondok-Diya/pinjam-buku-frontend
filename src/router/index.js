@@ -6,39 +6,65 @@ import TambahBuku from '../views/TambahBuku.vue'
 import GantiBuku from '../views/GantiBuku.vue'
 import Login from '../views/Login.vue'
 import Registrasi from '../views/Registrasi.vue'
+import store from '../store'
+import Logout from '../views/Logout'
 
 Vue.use(VueRouter)
-
+const ifNotAuthenticated = (to,from,next) => {
+    if (!store.getters.isAuthenticated){
+        next()
+        return
+    }
+    next('/')
+}
+const ifAuthenticated = (to,from,next) => {
+    if (store.getters.isAuthenticated) {
+        next()
+        return
+    }
+    next('/login')
+}
 const routes = [
  {
      path: '/daftar-buku',
      name: 'daftar-buku',
-     component: DaftarBuku
+     component: DaftarBuku,
+     beforeEnter: ifAuthenticated
  },
  {
      path: '/daftar-peminjam',
      name: 'daftar-peminjam',
-     component: Peminjam
+     component: Peminjam,
+     beforeEnter: ifAuthenticated
  },
  {
      path: '/tambah-buku',
      name: 'tambah-buku',
-     component: TambahBuku
+     component: TambahBuku,
+     beforeEnter: ifAuthenticated
  },
  {
      path: '/ganti-buku/:id',
      name: 'ganti-buku',
-     component: GantiBuku
+     component: GantiBuku,
+     beforeEnter: ifAuthenticated
  },
  {
      path: '/login',
      name: 'login',
-     component: Login
+     component: Login,
+     beforeEnter: ifNotAuthenticated
  },
  {
      path: '/registrasi',
      name: 'registrasi',
      component: Registrasi
+ },
+ {
+     path: '/logout',
+     name: 'logout',
+     component: Logout,
+     beforeEnter: ifAuthenticated
  }
 ]
 

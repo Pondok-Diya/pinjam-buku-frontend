@@ -22,7 +22,7 @@
                   <b-btn class="btn-info btn-md" value="submit" @click="login"> Login </b-btn>
               </div>
               <div id="register-link" class="text-right">
-                  <router-link class="text-info" to="/register">Daftar di sini</router-link>
+                  <router-link class="text-info" to="/registrasi">Daftar di sini</router-link>
               </div>
             </b-form>
           </b-card>              
@@ -49,19 +49,21 @@ export default {
       this.$http
       .post(this.$baseAPI+'login',this.form)
       .then((res)=>{
-        this.$store.dispatch('addToken',res.data.access_token)
-        this.$store.dispatch('addRefreshToken',res.data.refresh_token)
-        console.log(this.$store.getters.getToken)
-        console.log(this.$store.getters.getRefreshToken)
+        let token = 'user-token'
+        let refreshToken = 'refresh-token'
+        localStorage.setItem(token,res.data.access_token)
+        localStorage.setItem(refreshToken,res.data.refresh_token)
+        this.$store.dispatch('saveAddToken',token)
+        this.$store.dispatch('saveAddRefreshToken',refreshToken)
+        //console.log(this.$store.getters.getToken)
+        console.log(this.$store.getters.isAuthenticated)
+        this.$router.push('/daftar-buku')
       })
       .catch((err)=>{
         console.log(err)
       })
     },
-  },
-  created() {
-    
-  },
+  }
 };
 </script>
 <style>
