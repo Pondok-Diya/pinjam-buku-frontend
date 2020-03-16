@@ -8,6 +8,7 @@ import Login from '../views/Login.vue'
 import Registrasi from '../views/Registrasi.vue'
 import store from '../store'
 import Logout from '../views/Logout'
+import Detail from '../views/Detail'
 
 Vue.use(VueRouter)
 const ifNotAuthenticated = (to,from,next) => {
@@ -58,12 +59,19 @@ const routes = [
  {
      path: '/registrasi',
      name: 'registrasi',
-     component: Registrasi
+     component: Registrasi,
+     beforeEnter: ifNotAuthenticated
  },
  {
      path: '/logout',
      name: 'logout',
      component: Logout,
+     beforeEnter: ifAuthenticated
+ },
+ {
+     path: '/detail/:id',
+     name: 'detail',
+     component: Detail,
      beforeEnter: ifAuthenticated
  }
 ]

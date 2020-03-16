@@ -164,6 +164,14 @@ import {
 
 export default {
   name: 'BasicEditor',
+  props: {
+    content: String
+  },
+  watch: {
+    content: () => {
+      this.getContent()
+    }
+  },
   components: {
     EditorMenuBar,
     EditorContent,
@@ -193,28 +201,7 @@ export default {
         onUpdate: ({ getHTML }) => {          
           this.$emit('update', getHTML())
         },
-        content: `
-          <h2>
-            Heading 2,
-          </h2>
-          <p>
-            Ini adalah contoh paragraf sederhana. Gunakan <b>tombol</b> pada bagian atas editor untuk mengatur <i>formatting</i>.
-          </p>
-          <pre><code>body { display: none; }</code></pre>
-          <ul>
-            <li>
-              A regular list
-            </li>
-            <li>
-              With regular items
-            </li>
-          </ul>
-          <blockquote>
-            It's amazing 👏
-            <br />
-            – mom
-          </blockquote>
-        `,
+        content: ``,
       }),
       show: true,
       form: {
@@ -223,6 +210,9 @@ export default {
     }
   },
   methods: {
+    getContent(){
+      this.editor.content = this.content
+    },
     onSubmit() {
 
     },
@@ -230,7 +220,7 @@ export default {
 
     },
     onUpdate() {
-      console.log('update')
+      console.log(this.editor )
     }
   },
   mounted() {

@@ -1,10 +1,14 @@
 <template>
     <b-container>
-        <b-form v-if="tampil" @submit="addbook">
+        <div v-if="tampil">
             <h3 class="text-center text-info">Tambah Buku</h3>
                 <div class="form-group">
                     <label for="" class="text-info">Judul Buku:</label><br>
                     <input type="text" class="form-control" v-model="form.judul">
+                </div>
+                <div class="form-group">
+                    <label for="" class="text-info">Kode Buku:</label><br>
+                    <input type="text" class="form-control" v-model="form.kode">
                 </div>
                 <div class="form-group">
                     <label for="" class="text-info">Genre:</label><br>
@@ -27,9 +31,9 @@
                     <input type="text" class="form-control" v-model="form.isbn">
                 </div>
                 <div class="form-group">
-                  <b-btn class="btn-info btn-md" type="submit"> Tambah </b-btn>
+                  <b-btn class="btn-info btn-md" @click="addbook"> Tambah </b-btn>
               </div>
-        </b-form>
+        </div>
         <div v-if="!tampil">{{msg}}</div>
     </b-container>
 </template>
@@ -44,6 +48,7 @@ export default {
         return {
             form: {
                 judul: '',
+                kode: '',
                 genre: '',
                 penulis: '',
                 ringkasan: '',

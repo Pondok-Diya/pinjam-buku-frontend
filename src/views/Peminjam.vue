@@ -8,19 +8,20 @@
                     <th scope="col">Nama peminjam</th>
                     <th scope="col">Buku yang dipinjam</th>
                     <th scope="col">Waktu peminjaman</th>
-                    <th scope="col">Batas waktu Peminjaman</th>
+                    <th scope="col">Batas waktu pengembalian</th>
                 </tr>
             </thead>
             <tbody v-for="(pinjam,index) in peminjam" :key="index">
                 <tr>
-                    <th scope="row">{{index+1}}</th>
-                    <th>{{pinjam.nama}}</th>
-                    <th>{{pinjam.buku_dipinjam}}</th>
-                    <th>{{pinjam.waktu_pinjam}}</th>
-                    <th>{{pinjam.waktu_pengembalian}}</th>
+                    <td scope="row">{{index+1}}</td>
+                    <td>{{pinjam.nama}}</td>
+                    <td>{{pinjam.judul}}</td>
+                    <td>{{pinjam.created_at}}</td>
+                    <td>{{pinjam.waktu_pengembalian}}</td>
                 </tr>
             </tbody>
         </table>
+        <b-btn class="btn btn-success">Tambah Peminjam</b-btn>
     </div>
 </template>
 <script>
@@ -37,7 +38,9 @@ export default {
             .get(this.$baseAPI+'peminjam',{headers: {'Authorization': `Bearer ${this.$store.getters.getToken}` }})
             .then((response) => {
                 this.peminjam = response.data
-            }).catch(err=>console.log(err))
+            }).catch((err) => {
+                console.log(err)
+            })
         }
     },
     mounted(){

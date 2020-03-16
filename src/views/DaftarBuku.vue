@@ -10,6 +10,7 @@
                     <th scope="col">Penulis</th>
                     <th scope="col">Penerbit</th>
                     <th scope="col">ISBN</th>
+                    <th scope="col">#</th>
                     <th colspan="2">Opsi</th>
                 </tr>
             </thead>
@@ -21,6 +22,7 @@
                     <td>{{buku.penulis}}</td>
                     <td>{{buku.penerbit}}</td>
                     <td>{{buku.isbn}}</td>
+                    <td><b-btn class="btn btn-primary" @click="toDetail(buku.id)">Detail</b-btn></td>
                     <td><b-btn class="btn btn-info" @click="changeBook(buku.id)">Edit</b-btn></td>
                     <td><b-btn class="btn btn-warning" @click="confirmMassage(buku.id,buku.judul)">Hapus</b-btn></td>
                 </tr>
@@ -42,20 +44,16 @@ export default {
             this.$http
             .get(this.$baseAPI+'token/refresh',{headers: {'Authorization':`Bearer ${this.$store.getters.getRefreshToken}`}})
             .then((res) => {
-                localStorage.setItem('user-token',res.data.access_token)
+                console.log(res.data)
             })
             .catch((err) => {
                 console.log(err)
             })
         },
         loadData() {
-            console.log(localStorage.getItem('user-token'))
-            console.log(this.$store.getters.getToken)
-            console.log('__')
             this.$http
             .get(this.$baseAPI+'buku',{headers: {'Authorization': `Bearer ${this.$store.getters.getToken}` }})
             .then((res) => {
-                console.log(res.status)
                 this.bukus = res.data     
             })
             .catch((err) => {
@@ -65,7 +63,7 @@ export default {
             })
         },
         changeBook(id){
-            this.$router.push('/buku/'+id)
+            this.$router.push('/ganti-buku/'+id)
         },
         hapusBuku(id){
             this.$http
@@ -101,6 +99,9 @@ export default {
         },
         tambahBuku(){
             this.$router.push('/tambah-buku')
+        },
+        toDetail(id){
+            this.$router.push('/detail/'+id)
         }
     },
     mounted(){
