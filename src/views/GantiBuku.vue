@@ -1,5 +1,5 @@
 <template>
-    <b-container>
+    <div>
         <div v-if="tampil">
             <h3 class="text-center text-info">Ganti Buku</h3>
             <div class="form-group">
@@ -35,7 +35,7 @@
             </div>
         </div>
         <div v-if="!tampil">{{msg}}</div>
-    </b-container>
+    </div>
 </template>
 <script>
 import BasicEditor from '../components/BasicEditor.vue'
@@ -73,7 +73,6 @@ export default {
         .then((response)=>{
             this.form = response.data
             this.form.ringkasan = null
-            console.log(this.form)
         })
         .catch((err)=>{
             console.log(err)

@@ -34,7 +34,6 @@
 <script>
 export default {
   name: 'Login',
-  components: { },
   data() {
     return {
       form:{
@@ -42,7 +41,7 @@ export default {
         password: '',
         rememberMe: false
       }
-    };
+    }
   },
   methods: {
     login() {
@@ -56,7 +55,7 @@ export default {
         this.$store.dispatch('saveAddToken',token)
         this.$store.dispatch('saveAddRefreshToken',refreshToken)
         //console.log(this.$store.getters.getToken)
-        console.log(this.$store.getters.isAuthenticated)
+        //console.log(this.$store.getters.isAuthenticated)
         this.$router.push('/daftar-buku')
       })
       .catch((err)=>{
@@ -64,7 +63,7 @@ export default {
       })
     },
   }
-};
+}
 </script>
 <style>
   .login-page {

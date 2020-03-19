@@ -1,6 +1,5 @@
 <template>
   <div>  
-    <b-container>
       <b-row class="justify-content-center align-items-center login-row">
         <b-col md=6 sm=12>            
           <b-card>
@@ -38,7 +37,6 @@
           </b-card>              
         </b-col>
       </b-row>            
-    </b-container>
   </div>  
   </template>
 <script>

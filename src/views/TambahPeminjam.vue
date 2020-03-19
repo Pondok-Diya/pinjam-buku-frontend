@@ -1,5 +1,5 @@
 <template>
-    <b-container>
+    <div>
         <b-form v-if="tampil" @submit.prevent="tambahPeminjam">
             <h3 class="text-center text-info">Tambah Buku</h3>
                 <div class="form-group">
@@ -15,11 +15,11 @@
               </div>
         </b-form>
         <div v-if="!tampil">{{msg}}</div>
-    </b-container>
+    </div>
 </template>
 <script>
 export default {
-    name:'TambahBuku',
+    name:'TambahPeminjam',
     data(){
         return {
             form: {

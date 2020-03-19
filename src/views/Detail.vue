@@ -1,5 +1,5 @@
 <template>
-    <b-container>
+    <div>
         <b-row>
             <b-col cols="4">
                 <b-card>
@@ -49,7 +49,7 @@
                 </b-card>
             </b-col>
         </b-row>
-    </b-container>
+    </div>    
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-    <b-container>
+    <div>
         <div v-if="tampil">
             <h3 class="text-center text-info">Tambah Buku</h3>
                 <div class="form-group">
@@ -35,7 +35,7 @@
               </div>
         </div>
         <div v-if="!tampil">{{msg}}</div>
-    </b-container>
+    </div>
 </template>
 <script>
 import BasicEditor from '../components/BasicEditor.vue'

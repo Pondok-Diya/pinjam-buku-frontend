@@ -9,6 +9,7 @@
                     <th scope="col">Buku yang dipinjam</th>
                     <th scope="col">Waktu peminjaman</th>
                     <th scope="col">Batas waktu pengembalian</th>
+                    <th scope="col">#</th>
                 </tr>
             </thead>
             <tbody v-for="(pinjam,index) in peminjam" :key="index">
@@ -18,10 +19,11 @@
                     <td>{{pinjam.judul}}</td>
                     <td>{{pinjam.created_at}}</td>
                     <td>{{pinjam.waktu_pengembalian}}</td>
+                    <td><b-btn class="btn btn-warning" @click="pengembalian(pinjam.id)">Pengembalian</b-btn></td>
                 </tr>
             </tbody>
         </table>
-        <b-btn class="btn btn-success">Tambah Peminjam</b-btn>
+        <b-btn class="btn btn-success" @click="tambahPeminjam">Tambah Peminjam</b-btn>
     </div>
 </template>
 <script>
@@ -41,6 +43,12 @@ export default {
             }).catch((err) => {
                 console.log(err)
             })
+        },
+        tambahPeminjam(){
+            this.$router.push('/tambah-peminjam')
+        },
+        pengembalian(id){
+            this.$router.push('/pengembalian/'+id)
         }
     },
     mounted(){
