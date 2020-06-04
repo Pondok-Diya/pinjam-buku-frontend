@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label for="" class="text-info">Ringkasan:</label><br>
-                <basic-editor content="form.ringkasan" @update="updateRingkasan"/>
+                <basic-editor :content="form.ringkasan" @update="updateRingkasan"/>
             </div>
             <div class="form-group">
                 <label for="" class="text-info">Penerbit:</label><br>
@@ -72,7 +72,6 @@ export default {
         .get(this.$baseAPI+'buku/'+this.$route.params.id,{headers: {'Authorization': `Bearer ${this.$store.getters.getToken}` }})
         .then((response)=>{
             this.form = response.data
-            this.form.ringkasan = null
         })
         .catch((err)=>{
             console.log(err)

@@ -12,7 +12,7 @@ Vue.use(BootstrapVueIcons);
 
 
 Vue.prototype.$http = Axios
-Vue.prototype.$baseAPI = 'http://localhost:5000/'
+Vue.prototype.$baseAPI = 'http://192.168.0.102:5000/'
 
 Vue.config.productionTip = false
 

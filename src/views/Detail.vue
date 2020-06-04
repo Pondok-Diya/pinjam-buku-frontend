@@ -1,7 +1,7 @@
 <template>
     <div>
         <b-row>
-            <b-col cols="4">
+            <b-col cols="5">
                 <b-card>
                     <h3>Detail Buku</h3>
                     <table>
@@ -42,7 +42,7 @@
                     </table>
                 </b-card>
             </b-col>
-            <b-col cols="8">
+            <b-col cols="7">
                 <b-card>
                     <h3>Ringkasan</h3>
                     <div v-html="detail.ringkasan"></div>
@@ -65,7 +65,6 @@ export default {
         .get(this.$baseAPI+'buku/'+this.$route.params.id,{headers: {'Authorization': `Bearer ${this.$store.getters.getToken}` }})
         .then((response)=>{
             this.detail = response.data
-            console.log(this.detail)
         })
         .catch((err)=>{
             console.log(err)

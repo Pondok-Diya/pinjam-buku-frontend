@@ -168,9 +168,7 @@ export default {
     content: String
   },
   watch: {
-    content: () => {
-      this.getContent()
-    }
+    
   },
   components: {
     EditorMenuBar,
@@ -198,10 +196,10 @@ export default {
           new Underline(),
           new History(),
         ],
-        onUpdate: ({ getHTML }) => {          
+        onUpdate: ({ getHTML }) => {  
           this.$emit('update', getHTML())
         },
-        content: ``,
+        content: this.content
       }),
       show: true,
       form: {
@@ -210,9 +208,6 @@ export default {
     }
   },
   methods: {
-    getContent(){
-      this.editor.content = this.content
-    },
     onSubmit() {
 
     },
@@ -221,6 +216,7 @@ export default {
     },
     onUpdate() {
       console.log(this.editor )
+      console.log('editor')
     }
   },
   mounted() {
@@ -228,7 +224,7 @@ export default {
   },
   beforeDestroy() {
     this.editor.destroy()
-  },
+  }
 }
 </script>
 <style scoped>

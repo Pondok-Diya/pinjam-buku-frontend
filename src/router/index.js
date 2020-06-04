@@ -19,16 +19,17 @@ import Registrasi from '../views/Registrasi.vue'
 import store from '../store'
 import Logout from '../views/Logout'
 
+import Layout from '../views/container/Layout'
 
 Vue.use(VueRouter)
-const ifNotAuthenticated = (to,from,next) => {
-    if (!store.getters.isAuthenticated){
+const ifNotAuthenticated = (to, from, next) => {
+    if (!store.getters.isAuthenticated) {
         next()
         return
     }
     next('/')
 }
-const ifAuthenticated = (to,from,next) => {
+const ifAuthenticated = (to, from, next) => {
     if (store.getters.isAuthenticated) {
         next()
         return
@@ -36,89 +37,100 @@ const ifAuthenticated = (to,from,next) => {
     next('/login')
 }
 const routes = [
- {
-     path: '/daftar-buku',
-     name: 'daftar-buku',
-     component: DaftarBuku,
-     beforeEnter: ifAuthenticated
- },
- {
-    path: '/tambah-buku',
-    name: 'tambah-buku',
-    component: TambahBuku,
-    beforeEnter: ifAuthenticated
- },
- {
-    path: '/ganti-buku/:id',
-    name: 'ganti-buku',
-    component: GantiBuku,
-    beforeEnter: ifAuthenticated
- },
- {
-    path: '/detail/:id',
-    name: 'detail',
-    component: Detail,
-    beforeEnter: ifAuthenticated
- },
- {
-     path: '/daftar-anggota',
-     name: 'daftar-anggota',
-     component: DaftarAnggota,
-     beforeEnter: ifAuthenticated
- },
- {
-     path: '/tambah-anggota',
-     name: 'tambah-anggota',
-     component: TambahAnggota,
-     beforeEnter: ifAuthenticated
- },
- {
-     path: '/ganti-anggota/:id',
-     name: 'ganti-anggota',
-     component: GantiAnggota,
-     beforeEnter: ifAuthenticated
- },
- {
-     path: '/daftar-peminjam',
-     name: 'daftar-peminjam',
-     component: Peminjam,
-     beforeEnter: ifAuthenticated
- },
- {
-     path: '/tambah-peminjam',
-     name: 'tambah-peminjam',
-     component: TambahPeminjam,
-     beforeEnter: ifAuthenticated
- },
- {
-     path: '/pengembalian/:id',
-     name: 'pengembalian',
-     component: Pengembalian,
-     beforeEnter: ifAuthenticated
- },
- {
-    path: '/registrasi',
-    name: 'registrasi',
-    component: Registrasi,
-    beforeEnter: ifNotAuthenticated
- },
- {
-     path: '/login',
-     name: 'login',
-     component: Login,
-     beforeEnter: ifNotAuthenticated
- },
- {
-     path: '/logout',
-     name: 'logout',
-     component: Logout,
-     beforeEnter: ifAuthenticated
- }
+    {
+        path: '/',
+        redirect: '/daftar-buku',
+        name: 'Home',
+        component: Layout,
+        children: [
+            {
+                path: 'daftar-buku',
+                name: 'daftar-buku',
+                component: DaftarBuku,
+                beforeEnter: ifAuthenticated
+            }
+            ,
+            {
+                path: '/tambah-buku',
+                name: 'tambah-buku',
+                component: TambahBuku,
+                beforeEnter: ifAuthenticated
+            }
+            ,
+            {
+                path: '/ganti-buku/:id',
+                name: 'ganti-buku',
+                component: GantiBuku,
+                beforeEnter: ifAuthenticated
+            },
+            {
+                path: '/detail/:id',
+                name: 'detail',
+                component: Detail,
+                beforeEnter: ifAuthenticated
+            },
+            {
+                path: '/daftar-anggota',
+                name: 'daftar-anggota',
+                component: DaftarAnggota,
+                beforeEnter: ifAuthenticated
+            },
+            {
+                path: '/tambah-anggota',
+                name: 'tambah-anggota',
+                component: TambahAnggota,
+                beforeEnter: ifAuthenticated
+            },
+            {
+                path: '/ganti-anggota/:id',
+                name: 'ganti-anggota',
+                component: GantiAnggota,
+                beforeEnter: ifAuthenticated
+            },
+            {
+                path: '/daftar-peminjam',
+                name: 'daftar-peminjam',
+                component: Peminjam,
+                beforeEnter: ifAuthenticated
+            },
+            {
+                path: '/tambah-peminjam',
+                name: 'tambah-peminjam',
+                component: TambahPeminjam,
+                beforeEnter: ifAuthenticated
+            },
+            {
+                path: '/pengembalian/:id',
+                name: 'pengembalian',
+                component: Pengembalian,
+                beforeEnter: ifAuthenticated
+            }
+        ]
+    }
+    ,
+    {
+        path: '/registrasi',
+        name: 'registrasi',
+        component: Registrasi,
+        beforeEnter: ifNotAuthenticated
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: Login,
+        beforeEnter: ifNotAuthenticated
+    },
+    {
+        path: '/logout',
+        name: 'logout',
+        component: Logout,
+        beforeEnter: ifAuthenticated
+    }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes
 })
 export default router
